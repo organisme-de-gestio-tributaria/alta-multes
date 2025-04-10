@@ -22,8 +22,7 @@ L’explicació de cada funció del servei i de les dades que demana es troba a:
 * [Comentaris del WSDL](https://pda.orgt.diba.cat/WcfMultesPDA/svcMultesPDA.svc?singleWsdl). Podeu cancel·lar la sol·licitud de certificat per a accedir al WSDL. Malgrat que aquest wsdl està disponible només per la versió SOAP, els noms dels camps i les explicacions són les mateixes que per la versió REST.
 * L’esquema de validació de les dades rebudes es troba en el mateix webservice; en el cas de proves a: https://pdaprv16.orgt.diba.cat/RestMultesPDA/schema/svcMultesPDA.xsd 
 
-A grans trets el web service permet:
-Com a resum, té les següents operacions:
+El webservice ofereix les següents operacions:
 1. AltaMulta: dóna d'alta una multa.
 1. AltaAnulada: anul·la una multa prèviament entrada.
 1. Consulta: Consulta d'una multa. La multa s'identifica pel codi de municipi i el número d'expedient dins d'aquell municipi.
@@ -35,7 +34,7 @@ Com a resum, té les següents operacions:
 
 ## Exemples de crides i respostes
 
-PENDENT
+PENDENT XML's
 
 A continuació es presenten diversos exemples de crides i respostes. Podeu trobar més informació a:
 * **[Especificació swagger]([https://github.com/organisme-de-gestio-tributaria/autoliquidacio-generica/blob/main/swagger%20AutoliquidacioGenerica.json](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/swagger%20DeutesTributs.json)). Podeu crear el vostre client de forma automàtica a partir d'aquest fitxer.**
@@ -45,10 +44,10 @@ A continuació es presenten diversos exemples de crides i respostes. Podeu troba
 
 | Endpoint | Mètode HTTP | Exemples |
 |---|---|---|
-| AltaMulta | POST | [URL](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/AltaMulta) [Exemple XML petició](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Examples/AltaMulta%20peticio.xml) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaMulta%20resposta.xml)
+| AltaMulta | POST | [URL](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/AltaMulta) <br> [Exemple XML petició](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Examples/AltaMulta%20peticio.xml) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaMulta%20resposta.xml)
 | AltaAnulada | GET | [URL petició](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/AltaAnulada?pCdclie=123&pCdexpa=456&pIMEI=789) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaAnulada%20resposta.xml)
 | Consulta | GET | [URL petició](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/Consulta?pCdclie=123&pCdexpa=456) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/Consulta%20resposta.xml)
-| AltaInci | POST | [URL](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/AltaInci) [Exemple XML petició](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaInci%20peticio.xml) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaInci%20resposta.xml)
+| AltaInci | POST | [URL](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/AltaInci) <br> [Exemple XML petició](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaInci%20peticio.xml) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaInci%20resposta.xml)
 | ObtenirActualitzacions | GET | [URL petició](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/ObtenirActualitzacions?pIMEI=123&pClient=456&pData=202503010101&pSeguent=) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/ObtenirActualitzacions%20resposta.xml)
 | ObtenirRang | GET | [URL petició](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/ObtenirRang?pImei=123&pEstat1=1&pEstat2=1) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/ObtenirRang%20resposta.xml)
 
