@@ -1,0 +1,2236 @@
+{
+	"swagger": "2.0",
+	"info": {
+		"version": "1.0",
+		"title": "AltaMultes"
+	},
+	"host": "pdaprv16.orgt.diba.cat",
+	"basePath": "/RestMultesPDA/svcMultesPDA.svc/rest",
+	"paths": {
+		"/AltaAnulada": {
+			"get": {
+				"summary": "AltaAnulada",
+				"description": "Anul·lar una multa donada d'alta.",
+				"operationId": "WcfMultesPDA.svcMultesPDA.AltaAnulada",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "pCdclie",
+						"in": "query",
+						"description": "Codi del municipi, segons codificació ORGT: 3 dígits en format string. Exemple: '100'=Hospitalet de Llobregat. Utilitzar ObtenirMunicipis() per veure tots els valors",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "pCdexpa",
+						"in": "query",
+						"description": "Número d'expedient. Juntament amb el codi del municipi, identifica la multa",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "pIMEI",
+						"in": "query",
+						"description": "Identificador del dispositiu",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Objecte de tipus tRetorn amb el resultat de l'operació. \\n Un codi de retorn 1 vol dir que ja s'ha anul·lat una multa amb el mateix número d'expedient, encara que el municipi sigui un altre.\\n Un codi de retorn -1 vol dir que no s'ha pogut gravar l'anul·lació a la base de dades.\\n Un codi de retorn negatiu diferent de -9000 és un error de base de dades.\\n Un codi de retorn -9000 és un error diferent dels anteriors.\\n Encara que el codi de retorn sigui 0, com que les anul·lacions es graven en una base de dades intermitja i es processen\\n de forma desatesa, pot ser que no s'acabin anul·lant per alguna de les següents raons:\\n - La multa ja té una data/proposta, o no hi ha saldo per data.\\n - La multa està traspassada.\\n - La multa es troba en un expedient executiu bloquejat.\\n - Ja s'ha presentat al.legació o recurs.\\n - La multa té sanció i s'ha exhaurit el termini per pagar la sanció.",
+						"schema": {
+							"$ref": "#/definitions/WcfMultesPDA.tRetorn"
+						},
+						"examples": {
+							"application/xml": "<tRetorn xmlns=\"http://schemas.datacontract.org/2004/07/WcfMultesPDA\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><CodiRetorn>0</CodiRetorn><DescRetorn/></tRetorn>"
+						}
+					}
+				}
+			}
+		},
+		"/AltaInci": {
+			"post": {
+				"summary": "AltaAnulada",
+				"description": "Alta d'una incidència a la via pública.",
+				"operationId": "WcfMultesPDA.svcMultesPDA.AltaInci",
+				"consumes": [
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "pInci",
+						"in": "body",
+						"description": "Dades de la incidència en format XML",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/WcfMultesPDA.InciType"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Objecte de tipus tRetorn amb el resultat de l'operació. \\n Un codi de retorn -1 vol dir que no s'ha pogut gravar la incidència a la base de dades.\\n Un codi de retorn negatiu diferent de -9000 és un error de base de dades.\\n Un codi de retorn -9000 és un error diferent dels anteriors.",
+						"schema": {
+							"$ref": "#/definitions/WcfMultesPDA.tRetorn"
+						},
+						"examples": {
+							"application/xml": "<tRetorn xmlns=\"http://schemas.datacontract.org/2004/07/WcfMultesPDA\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><CodiRetorn>0</CodiRetorn><DescRetorn/></tRetorn>"
+						}
+					}
+				}
+			}
+		},
+		"/AltaMulta": {
+			"post": {
+				"summary": "AltaMulta",
+				"description": "Alta d'una multa. La multa s'identifica pel codi de municipi i el número d'expedient dins d'aquell municipi.  El número d'expedient ha d'estar dins del rang demanat amb la funció ObtenirRang()",
+				"operationId": "WcfMultesPDA.svcMultesPDA.AltaMulta",
+				"consumes": [
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "pMulta",
+						"in": "body",
+						"description": "Dades de la multa en format XML. Els camps de MultaType han d'ordenar-se alfabeticament. Exemple:\r\n     <MultaType xmlns=\\\"http://schemas.datacontract.org/2004/07/WcfMultesPDA\\\"><Cdagen>220</Cdagen><Cdasig>S</Cdasig><Cdclie>088</Cdclie><Cdcond>C</Cdcond><Cdexpa>P090018145</Cdexpa>\r\n\t <Cdiden /><Cdmatr>1234ABC</Cdmatr><Cdmunc>245</Cdmunc><Cdposc>08923</Cdposc><Cdrefe /><Codvia>CR</Codvia><Color>GRIS</Color>\r\n\t <Desamp1></Desamp1><Desamp2></Desamp2><Desamp3></Desamp3><Desamp4></Desamp4><Desamp5></Desamp5>\r\n\t <Dsadrc>CARRER ARAGO 38</Dsadrc><Dslloc>VIA PÚBLICA</Dslloc><Dsmunc>SANTA COLOMA</Dsmunc><Dspais>ESPAÑA</Dspais><Dsprov>BARCELONA</Dsprov>\r\n\t <Dtcoca/><Dtinfr>20250406</Dtinfr><Dtmenor>20020101</Dtmenor><Foto>/9j/YZVDELmjozSniHHQ//2Q2A==</Foto>\r\n\t <Hmmult>1234</Hmmult><Identi>00000000T</Identi><Idepda>353947020131525</Idepda><Immult>600</Immult><Imppag>300</Imppag>\r\n\t <Marca>SEAT</Marca><Model>MALAGA</Model><Nmmobi>123456</Nmmobi>\r\n\t <Nom></Nom><Numvia>12</Numvia><Orivia>O</Orivia><Quiden>A</Quiden><Resident>S</Resident><Retcar>S</Retcar><Snfoto>S</Snfoto><Snmeno>S</Snmeno><Snsign>S</Snsign>\r\n\t <Sqcond>8430</Sqcond><Tpmatr>2</Tpmatr><Tpvehi>1</Tpvehi><Viapen>N</Viapen></MultaType>",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/WcfMultesPDA.MultaType"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Objecte de tipus tRetorn amb el resultat de l'operació. \\n Un codi de retorn -1 vol dir que no s'ha pogut afegir la multa a la base de dades. \\n Un codi de retorn negatiu diferent de -9000 és un error de base de dades.\\n Un codi de retorn -9000 és un error diferent dels anteriors.",
+						"schema": {
+							"$ref": "#/definitions/WcfMultesPDA.tRetorn"
+						},
+						"examples": {
+							"application/xml": "<tRetorn xmlns=\"http://schemas.datacontract.org/2004/07/WcfMultesPDA\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><CodiRetorn>0</CodiRetorn><DescRetorn/></tRetorn>"
+						}
+					}
+				}
+			}
+		},
+		"/BuscarActualitzacions": {
+			"post": {
+				"summary": "BuscarActualitzacions",
+				"description": "Obsoleta. Obté les actualitzacions dels fitxers mestres. Es recomana fer servir ObtenirActualitzacions()",
+				"operationId": "WcfMultesPDA.svcMultesPDA.BuscarActualitzacions",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "BuscarActualitzacionsWrapper",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/BuscarActualitzacions"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "(OBSOLETA)",
+						"schema": {
+							"$ref": "#/definitions/BuscarActualitzacionsResultWrapper"
+						},
+						"examples": {
+							"application/xml": "(OBSOLETA)"
+						}
+					}
+				}
+			}
+		},
+		"/BuscarEscuts": {
+			"post": {
+				"summary": "BuscarEscuts",
+				"description": "Obté, donat un identificador de dispositiu, els escuts del seu municipi associat. S'obtenen dos escuts, un per mostrar a pantalla i l'altre per imprimir la butlleta. Es recomana fer servir l'endpoint ObtenirEscuts() en comptes d'aquest",
+				"operationId": "WcfMultesPDA.svcMultesPDA.BuscarEscuts",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "BuscarEscutsWrapper",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/BuscarEscuts"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Objecte de tipus tRetorn amb el resultat de l'operació. \\n Un codi de retorn -1 vol dir que el número de dispositiu no és correcte. \\n Un codi de retorn -2 vol dir que el municipi del dispositiu no té escuts associats. \\n Un codi de retorn negatiu diferent de -9000 és un error de base de dades.\\n Un codi de retorn -9000 és un error diferent dels anteriors.",
+						"schema": {
+							"$ref": "#/definitions/BuscarEscutsResultWrapper"
+						},
+						"examples": {
+							"application/xml": "(OBSOLETA)"
+						}
+					}
+				}
+			}
+		},
+		"/BuscarFitxer": {
+			"post": {
+				"summary": "BuscarFitxer",
+				"description": "Baixa un document PDF, el nom del qual s'ha obtingut amb l'endpoint ObtenirActualitzacions()",
+				"operationId": "WcfMultesPDA.svcMultesPDA.BuscarFitxer",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "BuscarFitxerWrapper",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/BuscarFitxer"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Objecte de tipus tRetorn amb el resultat de l'operació. \\n Un codi de retorn -9000 és una excepció no controlada.",
+						"schema": {
+							"$ref": "#/definitions/BuscarFitxerResultWrapper"
+						},
+						"examples": {
+							"application/xml": "(OBSOLETA)"
+						}
+					}
+				}
+			}
+		},
+		"/BuscarPrecintat": {
+			"post": {
+				"summary": "BuscarPrecintat",
+				"description": "Consulta si un vehicle està precintat pel municipi especificat",
+				"operationId": "WcfMultesPDA.svcMultesPDA.BuscarPrecintat",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "BuscarPrecintatWrapper",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/BuscarPrecintat"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Objecte de tipus tRetorn amb el resultat de l'operació. \\n Un codi de retorn -1 indica un Error aplicatiu \\n Un codi de retorn -9000 és una excepció no controlada.",
+						"schema": {
+							"$ref": "#/definitions/BuscarPrecintatResultWrapper"
+						},
+						"examples": {
+							"application/xml": "(OBSOLETA)"
+						}
+					}
+				}
+			}
+		},
+		"/CanviPassword": {
+			"get": {
+				"summary": "CanviPassword",
+				"description": "Canvia la contrasenya d'un agent",
+				"operationId": "WcfMultesPDA.svcMultesPDA.CanviPassword",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "pIMEI",
+						"in": "query",
+						"description": "Identificador del dispositiu: màxim 15 posicions alfanumèriques",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "pAgent",
+						"in": "query",
+						"description": "Codi de l'agent: màxim 5 posicions alfanumèriques",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "pOldPass",
+						"in": "query",
+						"description": "Contrasenya actual",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "pNewPass",
+						"in": "query",
+						"description": "Nova contrasenya",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Objecte de tipus tRetorn amb el resultat de l'operació. \\n Un codi de retorn -1 vol dir que no ha trobat el dispositiu o que no s'ha posat la nova contrasenya \\n Un codi de retorn -2 vol dir que l'agent no pertany al municipi del dispositiu.\\n Un codi de retorn -3 vol dir que la contrasenya actual és errònia.\\n Un codi de retorn -4 vol dir que no s'ha pogut modificar la clau per un error de base de dades.\\n Un codi de retorn negatiu diferent de -9000 és un Error de base de dades.\\n Un codi de retorn -9000 és un Error diferent dels anteriors.",
+						"schema": {
+							"$ref": "#/definitions/WcfMultesPDA.tRetorn"
+						},
+						"examples": {
+							"application/xml": "<tRetorn xmlns=\"http://schemas.datacontract.org/2004/07/WcfMultesPDA\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><CodiRetorn>0</CodiRetorn> <DescRetorn/></tRetorn>"
+						}
+					}
+				}
+			}
+		},
+		"/ComprovarSoftware": {
+			"post": {
+				"summary": "ComprovarSoftware",
+				"description": "Funció per obtenir els executables de l'aplicació per PDA desenvolupada per l'ORGT. Serveix per l'actualització automàtica dels canvis fets a l'aplicació per PDA.",
+				"operationId": "WcfMultesPDA.svcMultesPDA.ComprovarSoftware",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "ComprovarSoftwareWrapper",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/ComprovarSoftware"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Objecte de tipus tRetorn amb el resultat de l'operació. \\n Un codi de retorn -1 vol dir que no s'ha trobat l'executable.\\n Un codi de retorn negatiu diferent de -9000 és un error de base de dades.\\n Un codi de retorn -9000 és una excepció no controlada.",
+						"schema": {
+							"$ref": "#/definitions/ComprovarSoftwareResultWrapper"
+						},
+						"examples": {
+							"application/xml": "(OBSOLETA)"
+						}
+					}
+				}
+			}
+		},
+		"/Consulta": {
+			"get": {
+				"summary": "Consulta",
+				"description": "Consulta d'una multa. La multa s'identifica pel codi de municipi i el número d'expedient dins d'aquell municipi.",
+				"operationId": "WcfMultesPDA.svcMultesPDA.Consulta",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "pCdclie",
+						"in": "query",
+						"description": "Codi de municipi (string de 3 dígits). Exemple: '100'=Hospitalet de Llobregat. Utilitzar ObtenirMunicipis() per veure tots els valors",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "pCdexpa",
+						"in": "query",
+						"description": "Número d'expedient dins del municipi",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Objecte de tipus MultaType",
+						"schema": {
+							"$ref": "#/definitions/WcfMultesPDA.MultaExtended"
+						},
+						"examples": {
+							"application/xml": "<MultaExtended xmlns=\"http://schemas.datacontract.org/2004/07/WcfMultesPDA\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Cdagen>501</Cdagen><Cdasig>A</Cdasig><Cdclie>088</Cdclie><Cdcond>D</Cdcond><Cdexpa>0880000001</Cdexpa><Cdiden>0</Cdiden><Cdmatr>1234ABC</Cdmatr><Cdmunc>245</Cdmunc><Cdposc>08923</Cdposc><Cdrefe /><Codvia>CR</Codvia><Color/><Desamp1/><Desamp2/><Desamp3/><Desamp4/><Desamp5/><Dsadrc/><Dslloc>CARRER ARAGÓ</Dslloc><Dsmunc>SANTA COLOMA</Dsmunc><Dspais>ESPAÑA</Dspais><Dsprov>BARCELONA</Dsprov><Dtcoca /><Dtinfr>28072018</Dtinfr><Dtmenor/><Foto>BytesCodificatsEnBase64,exemple./9j/YZVDELmjozSniHHQ//2Q2A==</Foto><Hmmult>1106</Hmmult><Identi/><Idepda/><Immult>8000</Immult><Imppag>0</Imppag><Marca>SEAT</Marca><Model>MALAGA</Model><Nmmobi>123456</Nmmobi><Nom/><Numvia>0</Numvia><Orivia>O</Orivia><Quiden i:nil=\"true\"/><Resident/><Retcar>N</Retcar><Snfoto>N</Snfoto><Snmeno>N</Snmeno><Snsign>N</Snsign><Sqcond>3888</Sqcond><Tpmatr>1</Tpmatr><Tpvehi/><Viapen>N</Viapen><Anulada>false</Anulada><CodiBarres/><DataPagament>0001-01-01T00:00:00</DataPagament><cdesta>P</cdesta><dniden i:nil=\"True\"/><dserror i:nil=\"True\"/></MultaExtended>"
+						}
+					}
+				}
+			}
+		},
+		"/DemanarRang": {
+			"post": {
+				"summary": "DemanarRang",
+				"description": "Demana nous rangs d'expedients per un dispositiu, per poder treballar sense connexió. Es recomana fer servir l'endpoint ObtenirRang() en comptes d'aquest",
+				"operationId": "WcfMultesPDA.svcMultesPDA.DemanarRang",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "DemanarRangWrapper",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/DemanarRang"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Objecte de tipus tRetorn amb el resultat de l'operació. \\n Un codi de retorn -1 indica un Error aplicatiu \\n Un codi de retorn -9000 és una excepció no controlada.",
+						"schema": {
+							"$ref": "#/definitions/DemanarRangResultWrapper"
+						},
+						"examples": {
+							"application/xml": "(OBSOLETA)"
+						}
+					}
+				}
+			}
+		},
+		"/EnviarSMS": {
+			"post": {
+				"summary": "EnviarSMS",
+				"description": "Funció per enviar SMS. Obsoleta.",
+				"operationId": "WcfMultesPDA.svcMultesPDA.EnviarSMS",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "EnviarSMSWrapper",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/EnviarSMS"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "(OBSOLETA)",
+						"schema": {
+							"$ref": "#/definitions/EnviarSMSResultWrapper"
+						},
+						"examples": {
+							"application/xml": "(OBSOLETA)"
+						}
+					}
+				}
+			}
+		},
+		"/FerLogin": {
+			"get": {
+				"summary": "FerLogin",
+				"description": "Identifica l'agent i el seu dispositiu al sistema. L'agent ha de pertànyer al municipi associat al dispositiu.  Es recomana fer servir aquest endpoint en comptes de ValidarLogin",
+				"operationId": "WcfMultesPDA.svcMultesPDA.FerLogin",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "CodiAgent",
+						"in": "query",
+						"description": "Codi de l'agent: màxim 5 posicions alfanumèriques",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "Password",
+						"in": "query",
+						"description": "Contrasenya: màxim 8 posicions alfanumèriques",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "IMEI",
+						"in": "query",
+						"description": "Identificador del dispositiu: màxim 15 posicions alfanumèriques",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Resposta amb un objecte de tipus tRetorn amb el resultat de l'operació. \\n Un codi de retorn -1 vol dir que no ha trobat el dispositiu o que no s'ha posat la nova contrasenya \\n Un codi de retorn -2 vol dir que l'agent no pertany al municipi del dispositiu.\\n Un codi de retorn -3 vol dir que la contrasenya actual és errònia.\\n Un codi de retorn -4 vol dir que no s'ha pogut modificar la clau per un error de base de dades.\\n Un codi de retorn negatiu diferent de -9000 és un error de base de dades.\\n Un codi de retorn -9000 és un error diferent dels anteriors.",
+						"schema": {
+							"$ref": "#/definitions/WcfMultesPDA.LoginResult"
+						},
+						"examples": {
+							"application/xml": "<LoginResult xmlns=\"http://schemas.datacontract.org/2004/07/WcfMultesPDA\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Canviar>false</Canviar><Client inil=\"True\"/><DiaiHora i:nil=\"true\"/><Retorn><CodiRetorn>0</CodiRetorn><DescRetorn/></Retorn></LoginResult>"
+						}
+					}
+				}
+			}
+		},
+		"/ObtenirActualitzacions": {
+			"get": {
+				"summary": "ObtenirActualitzacions",
+				"description": "Obté les actualitzacions dels fitxers mestres necessaris per la gravació de multes i incidències.",
+				"operationId": "WcfMultesPDA.svcMultesPDA.ObtenirActualitzacions",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "pIMEI",
+						"in": "query",
+						"description": "Identificador del dispositiu: màxim 15 posicions alfanumèriques",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "pClient",
+						"in": "query",
+						"description": "Codi del municipi, segons codificació ORGT",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "pData",
+						"in": "query",
+						"description": "Data de l'última actualització dels mestres, en format yyyyMMddHHmm.  Quan s'incorpora un municipi nou, cal descarregar els mestres des de 1-1-1900 per assegurar-se  de què tenim tot. A partir d'aquí, periòdicament es poden fer descàrregues de mestres posant com a data la  de l'última descàrrega, per obtenir només les actualitzacions.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "pSeguent",
+						"in": "query",
+						"description": "String que identifica la següent pàgina de dades mestres a baixar-se per actualitzar.  En la primera crida cal deixar aquest paràmetre en blanc. Per obtenir totes les actualitzacions disponibles,  cal fer crides successives a aquesta funció passant-li a pSeguent el string retornat en la crida anterior,  fins que retorni un string buit, cosa que indica que no hi ha més actualitzacions a baixar.",
+						"required": true,
+						"type": "string"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Retorna un objecte de tipus Actualitzacions",
+						"schema": {
+							"$ref": "#/definitions/WcfMultesPDA.Actualitzacions"
+						},
+						"examples": {
+							"application/xml": "<Actualitzacions xmlns=\"http://schemas.datacontract.org/2004/07/WcfMultesPDA\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><AmbitsIncidencia/><AnomaliesIncidencia/><Articles><ActualitzacioArticle><Cdclie>006</Cdclie><TipusActualitzacio>Alta</TipusActualitzacio><artreg>20</artreg><cnorma>RGC</cnorma><dsarti>NIVELLS D'ALCOHOL EN SANG I AIRE ESPIRAT</dsarti><sqregl>1655</sqregl></ActualitzacioArticle><ActualitzacioArticle><Cdclie>006</Cdclie><TipusActualitzacio>Alta</TipusActualitzacio><artreg>46</artreg><cnorma>RGC</cnorma><dsarti>MODERACIÓ DE LA VELOCITAT. SUPÒSITS</dsarti><sqregl>1657</sqregl></ActualitzacioArticle></Articles><Carrerer/><Colors/><Conductes/><Documents/><Models/><Motius/><Municipis/><ObjectesIncidencia/><Organs/><Retorn><CodiRetorn>0</CodiRetorn><DescRetorn/></Retorn><Seguent>ART00342261</Seguent><TipusIncidencia/><VehiclesPrecintats/></Actualitzacions>"
+						}
+					}
+				}
+			}
+		},
+		"/ObtenirEscuts": {
+			"get": {
+				"summary": "ObtenirEscuts",
+				"description": "Obté, donat un identificador de dispositiu, l'escut del seu municipi associat en dues versions: un per mostrar a pantalla  i l'altre per imprimir la butlleta. Es recomana fer servir aquesta endpoint en comptes de BuscarEscuts()",
+				"operationId": "WcfMultesPDA.svcMultesPDA.ObtenirEscuts",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "pIMEI",
+						"in": "query",
+						"description": "Identificador del dispositiu: màxim 15 posicions alfanumèriques",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "pForsar",
+						"in": "query",
+						"description": "Posant True força la baixada dels dos escuts. Si es posa False, només es baixen si han canviat des de l'última baixada",
+						"required": true,
+						"type": "boolean"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Objecte de tipus Escuts amb el resultat de l'operació i els escuts associats. \\n Un codi de retorn -1 vol dir que el número de dispositiu no és correcte. \\n Un codi de retorn -2 vol dir que el municipi del dispositiu no té escuts associats. \\n Un codi de retorn negatiu diferent de -9000 és un error de base de dades.\\n Un codi de retorn -9000 és un error diferent dels anteriors.",
+						"schema": {
+							"$ref": "#/definitions/WcfMultesPDA.Escuts"
+						},
+						"examples": {
+							"application/xml": "<Escuts xmlns=\"http://schemas.datacontract.org/2004/07/WcfMultesPDA\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><Escut1 i:nil=\"true\"/><Escut2 i:nil=\"True\"/><Retorn><CodiRetorn>0</CodiRetorn><DescRetorn/></Retorn></Escuts>"
+						}
+					}
+				}
+			}
+		},
+		"/ObtenirMunicipis": {
+			"get": {
+				"summary": "ObtenirMunicipis",
+				"description": "Obté el llistat de municipis. Porporciona el codi de municipi segons codificació ORGT i el codi corresponent segons l'INE (10 dígits)",
+				"operationId": "WcfMultesPDA.svcMultesPDA.ObtenirMunicipis",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"responses": {
+					"200": {
+						"description": "Retorna una llista completa dels municipis en forma de col·lecció de ActualitzacioMunicipi",
+						"schema": {
+							"$ref": "#/definitions/WcfMultesPDA.ActualitzacioMunicipi"
+						},
+						"examples": {
+							"application/xml": "<ArrayOfActualitzacioMunicipi xmlns=\"http://schemas.datacontract.org/2004/07/WcfMultesPDA\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><ActualitzacioMunicipi><Cdclie>093</Cdclie><TipusActualitzacio>Alta</TipusActualitzacio><cine10>0809450006</cine10><dsnom1>AJUNTAMENT DE</dsnom1><dsnom2> LA GRANADA</dsnom2><dsnomc>LA GRANADA</dsnomc></ActualitzacioMunicipi><ActualitzacioMunicipi><Cdclie>094</Cdclie><TipusActualitzacio>Alta</TipusActualitzacio><cine10>0809580001</cine10><dsnom1>AJUNTAMENT</dsnom1><dsnom2> DE GRANERA</dsnom2><dsnomc>GRANERA</dsnomc></ActualitzacioMunicipi></ArrayOfActualitzacioMunicipi>"
+						}
+					}
+				}
+			}
+		},
+		"/ObtenirRang": {
+			"get": {
+				"summary": "ObtenirRang",
+				"description": "Demana nous rangs d'expedients per un dispositiu, per poder treballar sense connexió. Es recomana fer servir aquesta endpoint en comptes de DemanarRang()",
+				"operationId": "WcfMultesPDA.svcMultesPDA.ObtenirRang",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "pImei",
+						"in": "query",
+						"description": "Identificador del dispositiu: màxim 15 posicions alfanumèriques",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "pEstat1",
+						"in": "query",
+						"description": "Cal posar un 1 per demanar el rang principal, 0 si no es vol demanar",
+						"required": true,
+						"type": "integer",
+						"format": "int32"
+					},
+					{
+						"name": "pEstat2",
+						"in": "query",
+						"description": "Cal posar un 1 per demanar el rang principal, 0 si no es vol demanar",
+						"required": true,
+						"type": "integer",
+						"format": "int32"
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Objecte de tipus Rang amb el resultat de l'operació. \\n Un codi de retorn -1 indica un Error aplicatiu \\n Un codi de retorn -9000 és una excepció no controlada.",
+						"schema": {
+							"$ref": "#/definitions/WcfMultesPDA.Rang"
+						},
+						"examples": {
+							"application/xml": "<Rang xmlns=\"http://schemas.datacontract.org/2004/07/WcfMultesPDA\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><MaxRang1>1590630</MaxRang1><MaxRang2>1590640</MaxRang2><MinRang2>1590631</MinRang2><Minrang1>1590621</Minrang1><Retorn><CodiRetorn>0</CodiRetorn><DescRetorn/></Retorn></Rang>"
+						}
+					}
+				}
+			}
+		},
+		"/ValidarLogin": {
+			"get": {
+				"summary": "ValidarLogin",
+				"description": "Identifica l'agent i el seu dispositiu al sistema. L'agent ha de pertànyer al municipi associat al dispositiu.  Es recomana fer servir l'endpoint FerLogin() en comptes d'aquest",
+				"operationId": "WcfMultesPDA.svcMultesPDA.ValidarLogin",
+				"consumes": [
+					"application/json",
+					"application/xml"
+				],
+				"produces": [
+					"application/xml"
+				],
+				"parameters": [
+					{
+						"name": "CodiAgent",
+						"in": "query",
+						"description": "Codi de l'agent: màxim 5 posicions alfanumèriques.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "Password",
+						"in": "query",
+						"description": "Contrasenya: màxim 8 posicions alfanumèriques",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "IMEI",
+						"in": "query",
+						"description": "Identificador del dispositiu: màxim 15 posicions alfanumèriques.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "pClient",
+						"in": "query",
+						"description": "Paràmetre de sortida. Codi del municipi, segons codificació ORGT. S'obté a partir del identificador del dispositiu. Un dispositiu està associat a un únic municipi.",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "pDiaiHora",
+						"in": "query",
+						"description": "Paràmetre de sortida. Retorna dia i hora actual del servidor, en format dd/MM/yyyy HH:mm:ss",
+						"required": true,
+						"type": "string"
+					},
+					{
+						"name": "pCanviar",
+						"in": "query",
+						"description": "Paràmetre de sortida, indica si cal canviar la contrasenya (True/False)",
+						"required": true,
+						"type": "boolean"
+					},
+					{
+						"name": "ValidarLoginWrapper",
+						"in": "body",
+						"required": true,
+						"schema": {
+							"$ref": "#/definitions/ValidarLogin"
+						}
+					}
+				],
+				"responses": {
+					"200": {
+						"description": "Resposta amb un objecte de tipus tRetorn amb el resultat de l'operació. \\n Un codi de retorn -1 vol dir que no ha trobat el dispositiu o que no s'ha posat la nova contrasenya \\n Un codi de retorn -2 vol dir que l'agent no pertany al municipi del dispositiu.\\n Un codi de retorn -3 vol dir que la contrasenya actual és errònia.\\n Un codi de retorn -4 vol dir que no s'ha pogut modificar la clau per un error de base de dades.\\n Un codi de retorn negatiu diferent de -9000 és un error de base de dades.\\n Un codi de retorn -9000 és un error diferent dels anteriors.",
+						"schema": {
+							"$ref": "#/definitions/ValidarLoginResultWrapper"
+						},
+						"examples": {
+							"application/xml": "<ValidarLoginResponse xmlns=\"http://tempuri.org/\"><ValidarLoginResult xmlns:a=\"http//schemas.datacontract.org/2004/07/WcfMultesPDA\" xmlns:i=\"http://www.w3.org/2001/XMLSchema-instance\"><a:CodiRetorn>0</a:CodiRetorn><a:DescRetorn/></ValidarLoginResult></ValidarLoginResponse>"
+						}
+					}
+				}
+			}
+		}
+	},
+	"definitions": {
+		"BuscarActualitzacions": {
+			"properties": {
+				"pIMEI": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"pClient": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"pData": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"pDadesMestres": {
+					"$ref": "#/definitions/WcfMultesPDA.MestresType"
+				}
+			},
+			"type": "object",
+			"format": "BuscarActualitzacions"
+		},
+		"BuscarActualitzacionsResultWrapper": {
+			"properties": {
+				"BuscarActualitzacionsResult": {
+					"$ref": "#/definitions/WcfMultesPDA.tRetorn"
+				}
+			},
+			"type": "object",
+			"format": "BuscarActualitzacionsResultWrapper"
+		},
+		"BuscarEscuts": {
+			"properties": {
+				"pIMEI": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"pForsar": {
+					"type": "boolean",
+					"uniqueItems": false
+				},
+				"pEscut1": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"format": "byte"
+					},
+					"uniqueItems": false
+				},
+				"pEscut2": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"format": "byte"
+					},
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "BuscarEscuts"
+		},
+		"BuscarEscutsResultWrapper": {
+			"properties": {
+				"BuscarEscutsResult": {
+					"$ref": "#/definitions/WcfMultesPDA.tRetorn"
+				}
+			},
+			"type": "object",
+			"format": "BuscarEscutsResultWrapper"
+		},
+		"BuscarFitxer": {
+			"properties": {
+				"pNomFitxer": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"pFitxer": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"format": "byte"
+					},
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "BuscarFitxer"
+		},
+		"BuscarFitxerResultWrapper": {
+			"properties": {
+				"BuscarFitxerResult": {
+					"$ref": "#/definitions/WcfMultesPDA.tRetorn"
+				}
+			},
+			"type": "object",
+			"format": "BuscarFitxerResultWrapper"
+		},
+		"BuscarPrecintat": {
+			"properties": {
+				"pCdclie": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"pMatricula": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"pExiste": {
+					"type": "integer",
+					"format": "int32",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "BuscarPrecintat"
+		},
+		"BuscarPrecintatResultWrapper": {
+			"properties": {
+				"BuscarPrecintatResult": {
+					"$ref": "#/definitions/WcfMultesPDA.tRetorn"
+				}
+			},
+			"type": "object",
+			"format": "BuscarPrecintatResultWrapper"
+		},
+		"ComprovarSoftware": {
+			"properties": {
+				"pIMEI": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"pNom": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"pDataExe": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"pVersio": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"pFitxer": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"format": "byte"
+					},
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "ComprovarSoftware"
+		},
+		"ComprovarSoftwareResultWrapper": {
+			"properties": {
+				"ComprovarSoftwareResult": {
+					"$ref": "#/definitions/WcfMultesPDA.tRetorn"
+				}
+			},
+			"type": "object",
+			"format": "ComprovarSoftwareResultWrapper"
+		},
+		"DemanarRang": {
+			"properties": {
+				"pImei": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"pEstat1": {
+					"type": "integer",
+					"format": "int32",
+					"uniqueItems": false
+				},
+				"pEstat2": {
+					"type": "integer",
+					"format": "int32",
+					"uniqueItems": false
+				},
+				"pMinrang1": {
+					"type": "integer",
+					"format": "int64",
+					"uniqueItems": false
+				},
+				"pMaxRang1": {
+					"type": "integer",
+					"format": "int64",
+					"uniqueItems": false
+				},
+				"pMinRang2": {
+					"type": "integer",
+					"format": "int64",
+					"uniqueItems": false
+				},
+				"pMaxRang2": {
+					"type": "integer",
+					"format": "int64",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "DemanarRang"
+		},
+		"DemanarRangResultWrapper": {
+			"properties": {
+				"DemanarRangResult": {
+					"$ref": "#/definitions/WcfMultesPDA.tRetorn"
+				}
+			},
+			"type": "object",
+			"format": "DemanarRangResultWrapper"
+		},
+		"EnviarSMS": {
+			"properties": {
+				"pMobil": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"pCodiBarres": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"pCdclie": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"pCdexpa": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"pNIF": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"pIdioma": {
+					"type": "string",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "EnviarSMS"
+		},
+		"EnviarSMSResultWrapper": {
+			"properties": {
+				"EnviarSMSResult": {
+					"$ref": "#/definitions/WcfMultesPDA.tRetorn"
+				}
+			},
+			"type": "object",
+			"format": "EnviarSMSResultWrapper"
+		},
+		"ValidarLogin": {
+			"type": "object",
+			"format": "ValidarLogin"
+		},
+		"ValidarLoginResultWrapper": {
+			"properties": {
+				"ValidarLoginResult": {
+					"$ref": "#/definitions/WcfMultesPDA.tRetorn"
+				}
+			},
+			"type": "object",
+			"format": "ValidarLoginResultWrapper"
+		},
+		"WcfMultesPDA.ActualitzacioAmbitIncidencia": {
+			"properties": {
+				"nmtipu": {
+					"type": "integer",
+					"format": "int64",
+					"uniqueItems": false
+				},
+				"dsambi": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"nmambi": {
+					"type": "integer",
+					"format": "int32",
+					"uniqueItems": false
+				},
+				"Cdclie": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"TipusActualitzacio": {
+					"description": "\r\n\r\n    Alta = 0 \r\n    Baixa = 1 \r\n    Modificacio = 2 \r\n",
+					"type": "integer",
+					"format": "enum",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.ActualitzacioAmbitIncidencia"
+		},
+		"WcfMultesPDA.ActualitzacioAnomaliaIncidencia": {
+			"properties": {
+				"nmanom": {
+					"type": "integer",
+					"format": "int32",
+					"uniqueItems": false
+				},
+				"dsanom": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdclie": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"TipusActualitzacio": {
+					"description": "\r\n\r\n    Alta = 0 \r\n    Baixa = 1 \r\n    Modificacio = 2 \r\n",
+					"type": "integer",
+					"format": "enum",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.ActualitzacioAnomaliaIncidencia"
+		},
+		"WcfMultesPDA.ActualitzacioArticle": {
+			"properties": {
+				"cnorma": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"artreg": {
+					"type": "integer",
+					"format": "int64",
+					"uniqueItems": false
+				},
+				"dsarti": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"sqregl": {
+					"type": "integer",
+					"format": "int32",
+					"uniqueItems": false
+				},
+				"Cdclie": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"TipusActualitzacio": {
+					"description": "\r\n\r\n    Alta = 0 \r\n    Baixa = 1 \r\n    Modificacio = 2 \r\n",
+					"type": "integer",
+					"format": "enum",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.ActualitzacioArticle"
+		},
+		"WcfMultesPDA.ActualitzacioCarrerer": {
+			"properties": {
+				"sigles": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"carrer": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"codvia": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdclie": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"TipusActualitzacio": {
+					"description": "\r\n\r\n    Alta = 0 \r\n    Baixa = 1 \r\n    Modificacio = 2 \r\n",
+					"type": "integer",
+					"format": "enum",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.ActualitzacioCarrerer"
+		},
+		"WcfMultesPDA.ActualitzacioColor": {
+			"properties": {
+				"codiColor": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"color": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdclie": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"TipusActualitzacio": {
+					"description": "\r\n\r\n    Alta = 0 \r\n    Baixa = 1 \r\n    Modificacio = 2 \r\n",
+					"type": "integer",
+					"format": "enum",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.ActualitzacioColor"
+		},
+		"WcfMultesPDA.ActualitzacioConducta": {
+			"properties": {
+				"regl": {
+					"type": "integer",
+					"format": "int64",
+					"uniqueItems": false
+				},
+				"cdapar": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"cdsapa": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"cdcond": {
+					"type": "integer",
+					"format": "int64",
+					"uniqueItems": false
+				},
+				"dscoc1": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"dscoc2": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"dscoc3": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"dscoe1": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"dscoe2": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"dscoe3": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"import": {
+					"type": "integer",
+					"format": "int64",
+					"uniqueItems": false
+				},
+				"npunts": {
+					"type": "integer",
+					"format": "int64",
+					"uniqueItems": false
+				},
+				"grainf": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"impbon": {
+					"type": "integer",
+					"format": "int64",
+					"uniqueItems": false
+				},
+				"perbon": {
+					"type": "integer",
+					"format": "int64",
+					"uniqueItems": false
+				},
+				"numdies": {
+					"type": "integer",
+					"format": "int64",
+					"uniqueItems": false
+				},
+				"sqcond": {
+					"type": "integer",
+					"format": "int32",
+					"uniqueItems": false
+				},
+				"Cdclie": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"TipusActualitzacio": {
+					"description": "\r\n\r\n    Alta = 0 \r\n    Baixa = 1 \r\n    Modificacio = 2 \r\n",
+					"type": "integer",
+					"format": "enum",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.ActualitzacioConducta"
+		},
+		"WcfMultesPDA.ActualitzacioDocument": {
+			"properties": {
+				"abast": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"dsdocu": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"fitxer": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"numdoc": {
+					"type": "integer",
+					"format": "int32",
+					"uniqueItems": false
+				},
+				"Cdclie": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"TipusActualitzacio": {
+					"description": "\r\n\r\n    Alta = 0 \r\n    Baixa = 1 \r\n    Modificacio = 2 \r\n",
+					"type": "integer",
+					"format": "enum",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.ActualitzacioDocument"
+		},
+		"WcfMultesPDA.ActualitzacioModel": {
+			"properties": {
+				"marca": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"model": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdclie": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"TipusActualitzacio": {
+					"description": "\r\n\r\n    Alta = 0 \r\n    Baixa = 1 \r\n    Modificacio = 2 \r\n",
+					"type": "integer",
+					"format": "enum",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.ActualitzacioModel"
+		},
+		"WcfMultesPDA.ActualitzacioMotiu": {
+			"properties": {
+				"cdmotiu": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"motcat": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"motesp": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdclie": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"TipusActualitzacio": {
+					"description": "\r\n\r\n    Alta = 0 \r\n    Baixa = 1 \r\n    Modificacio = 2 \r\n",
+					"type": "integer",
+					"format": "enum",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.ActualitzacioMotiu"
+		},
+		"WcfMultesPDA.ActualitzacioMunicipi": {
+			"properties": {
+				"dsnomc": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"dsnom1": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"dsnom2": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"cine10": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdclie": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"TipusActualitzacio": {
+					"description": "\r\n\r\n    Alta = 0 \r\n    Baixa = 1 \r\n    Modificacio = 2 \r\n",
+					"type": "integer",
+					"format": "enum",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.ActualitzacioMunicipi"
+		},
+		"WcfMultesPDA.Actualitzacions": {
+			"properties": {
+				"Retorn": {
+					"$ref": "#/definitions/WcfMultesPDA.tRetorn"
+				},
+				"Seguent": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Municipis": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/WcfMultesPDA.ActualitzacioMunicipi"
+					},
+					"uniqueItems": false
+				},
+				"Organs": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/WcfMultesPDA.ActualitzacioOrgan"
+					},
+					"uniqueItems": false
+				},
+				"Carrerer": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/WcfMultesPDA.ActualitzacioCarrerer"
+					},
+					"uniqueItems": false
+				},
+				"Models": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/WcfMultesPDA.ActualitzacioModel"
+					},
+					"uniqueItems": false
+				},
+				"Articles": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/WcfMultesPDA.ActualitzacioArticle"
+					},
+					"uniqueItems": false
+				},
+				"Conductes": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/WcfMultesPDA.ActualitzacioConducta"
+					},
+					"uniqueItems": false
+				},
+				"Motius": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/WcfMultesPDA.ActualitzacioMotiu"
+					},
+					"uniqueItems": false
+				},
+				"VehiclesPrecintats": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/WcfMultesPDA.ActualitzacioVehiclePrecintat"
+					},
+					"uniqueItems": false
+				},
+				"Colors": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/WcfMultesPDA.ActualitzacioColor"
+					},
+					"uniqueItems": false
+				},
+				"TipusIncidencia": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/WcfMultesPDA.ActualitzacioTipusIncidencia"
+					},
+					"uniqueItems": false
+				},
+				"AmbitsIncidencia": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/WcfMultesPDA.ActualitzacioAmbitIncidencia"
+					},
+					"uniqueItems": false
+				},
+				"ObjectesIncidencia": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/WcfMultesPDA.ActualitzacioObjecteIncidencia"
+					},
+					"uniqueItems": false
+				},
+				"AnomaliesIncidencia": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/WcfMultesPDA.ActualitzacioAnomaliaIncidencia"
+					},
+					"uniqueItems": false
+				},
+				"Documents": {
+					"type": "array",
+					"items": {
+						"$ref": "#/definitions/WcfMultesPDA.ActualitzacioDocument"
+					},
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.Actualitzacions"
+		},
+		"WcfMultesPDA.ActualitzacioObjecteIncidencia": {
+			"properties": {
+				"nmobje": {
+					"type": "integer",
+					"format": "int32",
+					"uniqueItems": false
+				},
+				"nmambi": {
+					"type": "integer",
+					"format": "int64",
+					"uniqueItems": false
+				},
+				"dsobje": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdclie": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"TipusActualitzacio": {
+					"description": "\r\n\r\n    Alta = 0 \r\n    Baixa = 1 \r\n    Modificacio = 2 \r\n",
+					"type": "integer",
+					"format": "enum",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.ActualitzacioObjecteIncidencia"
+		},
+		"WcfMultesPDA.ActualitzacioOrgan": {
+			"properties": {
+				"orgins": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"orgsan": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdclie": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"TipusActualitzacio": {
+					"description": "\r\n\r\n    Alta = 0 \r\n    Baixa = 1 \r\n    Modificacio = 2 \r\n",
+					"type": "integer",
+					"format": "enum",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.ActualitzacioOrgan"
+		},
+		"WcfMultesPDA.ActualitzacioTipusIncidencia": {
+			"properties": {
+				"dstipu": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"nmtipu": {
+					"type": "integer",
+					"format": "int32",
+					"uniqueItems": false
+				},
+				"Cdclie": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"TipusActualitzacio": {
+					"description": "\r\n\r\n    Alta = 0 \r\n    Baixa = 1 \r\n    Modificacio = 2 \r\n",
+					"type": "integer",
+					"format": "enum",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.ActualitzacioTipusIncidencia"
+		},
+		"WcfMultesPDA.ActualitzacioVehiclePrecintat": {
+			"properties": {
+				"matedi": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"vehicle": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdclie": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"TipusActualitzacio": {
+					"description": "\r\n\r\n    Alta = 0 \r\n    Baixa = 1 \r\n    Modificacio = 2 \r\n",
+					"type": "integer",
+					"format": "enum",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.ActualitzacioVehiclePrecintat"
+		},
+		"WcfMultesPDA.Escuts": {
+			"properties": {
+				"Retorn": {
+					"$ref": "#/definitions/WcfMultesPDA.tRetorn"
+				},
+				"Escut1": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"format": "byte"
+					},
+					"uniqueItems": false
+				},
+				"Escut2": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"format": "byte"
+					},
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.Escuts"
+		},
+		"WcfMultesPDA.InciType": {
+			"properties": {
+				"Cdclie": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Nminci": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Imei": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdagen": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Nmtipu": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Nmambi": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Nmobje": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Nmanom": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Dsinci": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Dslloc": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Dtinci": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"NminciPDA": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Snfoto": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Foto": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"format": "byte"
+					},
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.InciType"
+		},
+		"WcfMultesPDA.LoginResult": {
+			"properties": {
+				"Retorn": {
+					"$ref": "#/definitions/WcfMultesPDA.tRetorn"
+				},
+				"Client": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"DiaiHora": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Canviar": {
+					"type": "boolean",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.LoginResult"
+		},
+		"WcfMultesPDA.MestresType": {
+			"properties": {
+				"SeguentMestre": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"SeguentId": {
+					"type": "integer",
+					"format": "int64",
+					"uniqueItems": false
+				},
+				"tope": {
+					"type": "integer",
+					"format": "int32",
+					"uniqueItems": false
+				},
+				"Sqapda": {
+					"type": "array",
+					"items": {
+						"type": "integer",
+						"format": "int64"
+					},
+					"uniqueItems": false
+				},
+				"Tipact": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"uniqueItems": false
+				},
+				"Cdclie": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"uniqueItems": false
+				},
+				"Mestre": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"uniqueItems": false
+				},
+				"Clau": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"uniqueItems": false
+				},
+				"Dades": {
+					"type": "array",
+					"items": {
+						"type": "string"
+					},
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.MestresType"
+		},
+		"WcfMultesPDA.MultaExtended": {
+			"properties": {
+				"CodiBarres": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"DataPagament": {
+					"type": "string",
+					"format": "date-time",
+					"uniqueItems": false
+				},
+				"cdesta": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"dserror": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Anulada": {
+					"type": "boolean",
+					"uniqueItems": false
+				},
+				"dniden": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdagen": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdasig": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdclie": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdcond": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdexpa": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdiden": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdmatr": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdmunc": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdposc": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdrefe": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Codvia": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Color": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Desamp1": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Desamp2": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Desamp3": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Desamp4": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Desamp5": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Dsadrc": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Dslloc": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Dsmunc": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Dspais": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Dsprov": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Dtcoca": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Dtinfr": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Dtmenor": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Hmmult": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Identi": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Immult": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Imppag": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Marca": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Model": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Nmmobi": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Nom": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Numvia": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Idepda": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Orivia": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Resident": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Retcar": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Snfoto": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Foto": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"format": "byte"
+					},
+					"uniqueItems": false
+				},
+				"Snmeno": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Snsign": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Sqcond": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Tpmatr": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Tpvehi": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Viapen": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Quiden": {
+					"type": "string",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.MultaExtended"
+		},
+		"WcfMultesPDA.MultaType": {
+			"properties": {
+				"Cdagen": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdasig": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdclie": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdcond": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdexpa": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdiden": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdmatr": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdmunc": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdposc": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Cdrefe": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Codvia": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Color": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Desamp1": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Desamp2": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Desamp3": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Desamp4": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Desamp5": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Dsadrc": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Dslloc": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Dsmunc": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Dspais": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Dsprov": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Dtcoca": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Dtinfr": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Dtmenor": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Hmmult": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Identi": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Immult": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Imppag": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Marca": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Model": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Nmmobi": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Nom": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Numvia": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Idepda": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Orivia": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Resident": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Retcar": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Snfoto": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Foto": {
+					"type": "array",
+					"items": {
+						"type": "string",
+						"format": "byte"
+					},
+					"uniqueItems": false
+				},
+				"Snmeno": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Snsign": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Sqcond": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Tpmatr": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Tpvehi": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Viapen": {
+					"type": "string",
+					"uniqueItems": false
+				},
+				"Quiden": {
+					"type": "string",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.MultaType"
+		},
+		"WcfMultesPDA.Rang": {
+			"properties": {
+				"Retorn": {
+					"$ref": "#/definitions/WcfMultesPDA.tRetorn"
+				},
+				"Minrang1": {
+					"type": "integer",
+					"format": "int64",
+					"uniqueItems": false
+				},
+				"MaxRang1": {
+					"type": "integer",
+					"format": "int64",
+					"uniqueItems": false
+				},
+				"MinRang2": {
+					"type": "integer",
+					"format": "int64",
+					"uniqueItems": false
+				},
+				"MaxRang2": {
+					"type": "integer",
+					"format": "int64",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.Rang"
+		},
+		"WcfMultesPDA.tRetorn": {
+			"properties": {
+				"CodiRetorn": {
+					"type": "integer",
+					"format": "int32",
+					"uniqueItems": false
+				},
+				"DescRetorn": {
+					"type": "string",
+					"uniqueItems": false
+				}
+			},
+			"type": "object",
+			"format": "WcfMultesPDA.tRetorn"
+		}
+	}
+}
