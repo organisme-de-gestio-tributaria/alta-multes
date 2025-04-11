@@ -31,6 +31,14 @@ El webservice ofereix les següents operacions:
 1. ObtenirRang: obté un rang de números d'expedient per assignar a les multes a donar d'alta.
 1. Existeixen altres funcions però estan obsoletes
 
+## Requisits
+
+Abans de fer servir el web service, cal:
+* Cal realitzar el procés de sol·licitud d'adhesió al webservice, [el seu detall està disponible a la pàgina principal](https://github.com/organisme-de-gestio-tributaria/organisme-de-gestio-tributaria). Com a part d'aquest procés, cal facilitar la part pública del certificat amb el qual s'accedirà al web service. El mateix certificat servirà tant per accedir a proves com a producció. Aquest certificat és necessari tant per cridar el web service com per accedir a l'especificació (wsdl, ajuda REST i schema).
+* Comunicar a l'ORGT els dispositius que es faran servir, per assignar-los un IMEI i donar-los d'alta a la nostra base de dades. Aquesta comunicació s'ha de fer també cada vegada que s'incorpora un nou dispositiu. 
+* Ja no cal comunicar els nous agents, sempre i quan a l'alta de la multa s'especifiqui el camp "quiden", indicant si qui fa la denúncia és un agent ("A"), un vigilant ("V"), un particular ("P") o un altre tipus de persona ("X"). 
+
+
 
 ## Exemples de crides i respostes
 
