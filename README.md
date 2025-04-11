@@ -29,6 +29,7 @@ El webservice ofereix les següents operacions:
 1. AltaInci: dóna d'alta una incidència a la via pública.
 1. ObtenirActualitzacions: obté les darreres actualitzacions (a partir d'una data donada) dels fitxers mestres de suport, així com dels documents associats.
 1. ObtenirRang: obté un rang de números d'expedient per assignar a les multes a donar d'alta.
+1. ObtenirMunicipis: Obté el llistat complet de municipis amb el corresponent codi ORGT i el codi INE de 10 dígits.
 1. Existeixen altres funcions però estan obsoletes
 
 ## Requisits
@@ -56,4 +57,4 @@ A continuació es presenten diversos exemples de crides i respostes. Podeu troba
 | AltaInci | POST | [URL](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/AltaInci) <br> [Exemple XML petició](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaInci%20peticio.xml) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaInci%20resposta.xml)
 | ObtenirActualitzacions | GET | [URL petició](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/ObtenirActualitzacions?pIMEI=123&pClient=456&pData=202503010101&pSeguent=) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/ObtenirActualitzacions%20resposta.xml)
 | ObtenirRang | GET | [URL petició](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/ObtenirRang?pImei=123&pEstat1=1&pEstat2=1) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/ObtenirRang%20resposta.xml)
-
+| ObtenirMunicipis | GET | [URL petició](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/ObtenirMunicipis) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/ObtenirMunicipis%20resposta.xml)

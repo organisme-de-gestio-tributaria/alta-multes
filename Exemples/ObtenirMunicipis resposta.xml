@@ -1,0 +1,18 @@
+<ArrayOfActualitzacioMunicipi xmlns="http://schemas.datacontract.org/2004/07/WcfMultesPDA" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<ActualitzacioMunicipi>
+		<Cdclie>093</Cdclie>
+		<TipusActualitzacio>Alta</TipusActualitzacio>
+		<cine10>0809450006</cine10>
+		<dsnom1>AJUNTAMENT DE</dsnom1>
+		<dsnom2> LA GRANADA</dsnom2>
+		<dsnomc>LA GRANADA</dsnomc>
+	</ActualitzacioMunicipi>
+	<ActualitzacioMunicipi>
+		<Cdclie>094</Cdclie>
+		<TipusActualitzacio>Alta</TipusActualitzacio>
+		<cine10>0809580001</cine10>
+		<dsnom1>AJUNTAMENT</dsnom1>
+		<dsnom2> DE GRANERA</dsnom2>
+		<dsnomc>GRANERA</dsnomc>
+	</ActualitzacioMunicipi>
+</ArrayOfActualitzacioMunicipi>
