@@ -42,7 +42,7 @@ A continuació es presenten diversos exemples de crides i respostes. Podeu troba
 
 | Endpoint | Mètode HTTP | Exemples |
 |---|---|---|
-| AltaMulta | POST | [URL](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/AltaMulta) <br> [Exemple XML petició](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Examples/AltaMulta%20peticio.xml) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaMulta%20resposta.xml)
+| AltaMulta | POST | [URL](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/AltaMulta) <br> [Exemple XML petició](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaMulta%20peticio.xml) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaMulta%20resposta.xml)
 | AltaAnulada | GET | [URL petició](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/AltaAnulada?pCdclie=123&pCdexpa=456&pIMEI=789) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaAnulada%20resposta.xml)
 | Consulta | GET | [URL petició](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/Consulta?pCdclie=123&pCdexpa=456) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/Consulta%20resposta.xml)
 | AltaInci | POST | [URL](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/AltaInci) <br> [Exemple XML petició](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaInci%20peticio.xml) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaInci%20resposta.xml)
