@@ -1,0 +1,15 @@
+<InciType xmlns="http://schemas.datacontract.org/2004/07/WcfMultesPDA">
+	<Cdagen>220</Cdagen>
+	<Cdclie>088</Cdclie>
+	<Dsinci>prova</Dsinci>
+	<Dslloc>via pública</Dslloc>
+	<Dtinci>2025/03/07 13:13:13</Dtinci>
+	<Foto>/9j/YZVDELmjozSniHHQ//2Q2A==</Foto>
+	<Imei>353947020131525</Imei>
+	<Nmambi>2</Nmambi>
+	<Nmanom>4</Nmanom>
+	<NminciPDA>4</NminciPDA>
+	<Nmobje>3</Nmobje>
+	<Nmtipu>1</Nmtipu>
+	<Snfoto>S</Snfoto>
+</InciType>

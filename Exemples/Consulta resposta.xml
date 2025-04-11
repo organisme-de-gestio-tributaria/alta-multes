@@ -1,0 +1,55 @@
+<MultaExtended xmlns="http://schemas.datacontract.org/2004/07/WcfMultesPDA" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<Cdagen>501</Cdagen>
+	<Cdasig>A</Cdasig>
+	<Cdclie>088</Cdclie>
+	<Cdcond>D</Cdcond>
+	<Cdexpa>0880000001</Cdexpa>
+	<Cdiden>0</Cdiden>
+	<Cdmatr>1234ABC</Cdmatr>
+	<Cdmunc>245</Cdmunc>
+	<Cdposc>08923</Cdposc>
+	<Cdrefe/>
+	<Codvia>CR</Codvia>
+	<Color/>
+	<Desamp1/>
+	<Desamp2/>
+	<Desamp3/>
+	<Desamp4/>
+	<Desamp5/>
+	<Dsadrc/>
+	<Dslloc>CARRER ARAGÓ</Dslloc>
+	<Dsmunc>SANTA COLOMA</Dsmunc>
+	<Dspais>ESPAÑA</Dspais>
+	<Dsprov>BARCELONA</Dsprov>
+	<Dtcoca/>
+	<Dtinfr>28072018</Dtinfr>
+	<Dtmenor/>
+	<Foto>BytesCodificatsEnBase64,exemple./9j/YZVDELmjozSniHHQ//2Q2A==</Foto>
+	<Hmmult>1106</Hmmult>
+	<Identi/>
+	<Idepda/>
+	<Immult>8000</Immult>
+	<Imppag>0</Imppag>
+	<Marca>SEAT</Marca>
+	<Model>MALAGA</Model>
+	<Nmmobi>123456</Nmmobi>
+	<Nom/>
+	<Numvia>0</Numvia>
+	<Orivia>O</Orivia>
+	<Quiden i:nil=" true"/>
+	<Resident/>
+	<Retcar>N</Retcar>
+	<Snfoto>N</Snfoto>
+	<Snmeno>N</Snmeno>
+	<Snsign>N</Snsign>
+	<Sqcond>3888</Sqcond>
+	<Tpmatr>1</Tpmatr>
+	<Tpvehi/>
+	<Viapen>N</Viapen>
+	<Anulada>false</Anulada>
+	<CodiBarres/>
+	<DataPagament>0001-01-01T00:00:00</DataPagament>
+	<cdesta>P</cdesta>
+	<dniden i:nil=" True"/>
+	<dserror i:nil=" True"/>
+</MultaExtended>

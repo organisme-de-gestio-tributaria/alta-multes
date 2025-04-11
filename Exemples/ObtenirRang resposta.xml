@@ -1,0 +1,10 @@
+<Rang xmlns=" http: schemas.datacontract.org 2004 07 WcfMultesPDA" xmlns:i=" http: www.w3.org 2001 XMLSchema-instance">
+	<MaxRang1>1590630</MaxRang1>
+	<MaxRang2>1590640</MaxRang2>
+	<MinRang2>1590631</MinRang2>
+	<Minrang1>1590621</Minrang1>
+	<Retorn>
+		<CodiRetorn>0</CodiRetorn>
+		<DescRetorn/>
+	</Retorn>
+</Rang>

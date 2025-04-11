@@ -1,0 +1,38 @@
+<Actualitzacions xmlns="http://schemas.datacontract.org/2004/07/WcfMultesPDA" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<AmbitsIncidencia/>
+	<AnomaliesIncidencia/>
+	<Articles>
+		<ActualitzacioArticle>
+			<Cdclie>006</Cdclie>
+			<TipusActualitzacio>Alta</TipusActualitzacio>
+			<artreg>20</artreg>
+			<cnorma>RGC</cnorma>
+			<dsarti>NIVELLS D'ALCOHOL EN SANG I AIRE ESPT</dsarti>
+			<sqregl>1655</sqregl>
+		</ActualitzacioArticle>
+		<ActualitzacioArticle>
+			<Cdclie>006</Cdclie>
+			<TipusActualitzacio>Alta</TipusActualitzacio>
+			<artreg>46</artreg>
+			<cnorma>RGC</cnorma>
+			<dsarti>MODERACIÓ DE LA VELOCITAT. SUPÒS</dsarti>
+			<sqregl>1657</sqregl>
+		</ActualitzacioArticle>
+	</Articles>
+	<Carrerer/>
+	<Colors/>
+	<Conductes/>
+	<Documents/>
+	<Models/>
+	<Motius/>
+	<Municipis/>
+	<ObjectesIncidencia/>
+	<Organs/>
+	<Retorn>
+		<CodiRetorn>0</CodiRetorn>
+		<DescRetorn/>
+	</Retorn>
+	<Seguent>ART00342261</Seguent>
+	<TipusIncidencia/>
+	<VehiclesPrecintats/>
+</Actualitzacions>

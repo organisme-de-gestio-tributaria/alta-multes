@@ -1,0 +1,4 @@
+<tRetorn xmlns="http://schemas.datacontract.org/2004/07/WcfMultesPDA" xmlns:i="http://www.w3.org/2001/XMLSchema-instance">
+	<CodiRetorn>0</CodiRetorn>
+	<DescRetorn/>
+</tRetorn>

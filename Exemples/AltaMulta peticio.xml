@@ -1,0 +1,49 @@
+<MultaType xmlns=" http: schemas.datacontract.org 2004 07 WcfMultesPDA">
+	<Cdagen>220</Cdagen>
+	<Cdasig>S</Cdasig>
+	<Cdclie>088</Cdclie>
+	<Cdcond>C</Cdcond>
+	<Cdexpa>P090018145</Cdexpa>
+	<Cdiden/>
+	<Cdmatr>1234ABC</Cdmatr>
+	<Cdmunc>245</Cdmunc>
+	<Cdposc>08923</Cdposc>
+	<Cdrefe/>
+	<Codvia>CR</Codvia>
+	<Color>GRIS</Color>
+	<Desamp1/>
+	<Desamp2/>
+	<Desamp3/>
+	<Desamp4/>
+	<Desamp5/>
+	<Dsadrc>CARRER ARAGO 38</Dsadrc>
+	<Dslloc>VIA PÚBLICA</Dslloc>
+	<Dsmunc>SANTA COLOMA</Dsmunc>
+	<Dspais>ESPAÑA</Dspais>
+	<Dsprov>BARCELONA</Dsprov>
+	<Dtcoca/>
+	<Dtinfr>20250406</Dtinfr>
+	<Dtmenor>20020101</Dtmenor>
+	<Foto>/9j/YZVDELmjozSniHHQ//2Q2A==</Foto>
+	<Hmmult>1234</Hmmult>
+	<Identi>00000000T</Identi>
+	<Idepda>353947020131525</Idepda>
+	<Immult>600</Immult>
+	<Imppag>300</Imppag>
+	<Marca>SEAT</Marca>
+	<Model>MALAGA</Model>
+	<Nmmobi>123456</Nmmobi>
+	<Nom/>
+	<Numvia>12</Numvia>
+	<Orivia>O</Orivia>
+	<Quiden>A</Quiden>
+	<Resident>S</Resident>
+	<Retcar>S</Retcar>
+	<Snfoto>S</Snfoto>
+	<Snmeno>S</Snmeno>
+	<Snsign>S</Snsign>
+	<Sqcond>8430</Sqcond>
+	<Tpmatr>2</Tpmatr>
+	<Tpvehi>1</Tpvehi>
+	<Viapen>N</Viapen>
+</MultaType>
