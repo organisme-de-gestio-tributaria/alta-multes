@@ -5,7 +5,7 @@ Aquest webservice permet donar d’alta multes i obtenir els fitxers mestres de 
 * Una aplicació web centralitzada. En aquest cas, o bé tota l'aplicació centralitzada gestiona un Ajuntament, i per tant s'identifica de cara a l'ORGT amb un únic IMEI, o bé gestiona diversos Ajuntaments, i per tant s'identifica per cada Ajuntament amb un IMEI diferent. En qualsevol dels dos casos, l'IMEI també l'assignarà l'ORGT seguint una nomenclatura única, que serà del tipus nom_empresa-codi_ajuntament, on nom_empresa és l'empresa que dóna el servei centralitzat, i codi_ajuntament és el codi ORGT de l'Ajuntament. Per exemple, si l'empresa "Multa S.A." gestiona l'Ajuntament d'Abrera, el seu IMEI serà "MULTA-001".
 
 
-Cal accedir al webservice mitjançat l'endpoint REST. L’especificació es pot obtenir del [fitxer swagger disponible en aquest repositori](https://github.com/organisme-de-gestio-tributaria/autoliquidacio-generica/blob/main/swagger%20WcfMultesPDA.json).
+Cal accedir al webservice mitjançat l'endpoint REST. L’especificació es pot obtenir del [fitxer swagger disponible en aquest repositori](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/swagger%20WcfMultesPDA.json).
 
 El servei es troba a les següents URL's:
 * Producció: https://pda.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/
@@ -18,7 +18,7 @@ Aspectes importants a tenir en compte:
 1. **Previ a les proves cal comunicar el certificat utilitzat a l’ORGT ja que és necessari instal·lar la clau pública als servidors de la ORGT.** Vegeu el procés de sol·licitud a la [pàgina principal](https://github.com/organisme-de-gestio-tributaria/organisme-de-gestio-tributaria)
 
 L’explicació de cada funció del servei i de les dades que demana es troba a:
-* [Fitxer swagger disponible en aquest repositori](https://github.com/organisme-de-gestio-tributaria/autoliquidacio-generica/blob/main/swagger%20WcfMultesPDA.json). 
+* [Fitxer swagger disponible en aquest repositori](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/swagger%20WcfMultesPDA.json). 
 * [Comentaris del WSDL](https://pda.orgt.diba.cat/WcfMultesPDA/svcMultesPDA.svc?singleWsdl). Podeu cancel·lar la sol·licitud de certificat per a accedir al WSDL. Malgrat que aquest wsdl està disponible només per la versió SOAP, els noms dels camps i les explicacions són les mateixes que per la versió REST.
 * L’esquema de validació de les dades rebudes es troba en el mateix webservice; en el cas de proves a: https://pdaprv16.orgt.diba.cat/RestMultesPDA/schema/svcMultesPDA.xsd 
 
@@ -37,7 +37,7 @@ El webservice ofereix les següents operacions:
 PENDENT XML's
 
 A continuació es presenten diversos exemples de crides i respostes. Podeu trobar més informació a:
-* **[Especificació swagger]([https://github.com/organisme-de-gestio-tributaria/autoliquidacio-generica/blob/main/swagger%20AutoliquidacioGenerica.json](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/swagger%20DeutesTributs.json)). Podeu crear el vostre client de forma automàtica a partir d'aquest fitxer.**
+* **[Especificació swagger](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/swagger%20DeutesTributs.json). Podeu crear el vostre client de forma automàtica a partir d'aquest fitxer.**
 * [Comentaris del WSDL](https://wsproves.orgt.diba.cat/deutes/DeutesServiceREST.svc?singleWsdl). Podeu cancel·lar la sol·licitud de certificat a l'accedir al WSDL. Malgrat que aquest wsdl està disponible només per la versió SOAP, els noms dels camps i les explicacions són les mateixes que per la versió REST.
 * L’esquema de validació de les dades rebudes es troba en el mateix webservice a: https://wsproves.orgt.diba.cat/deutes/schema/Deutes.xsd 
 * Cal notar que totes les dades de tipus text han d'estar en majúscules.
