@@ -9,13 +9,13 @@ Cal accedir al webservice mitjançat l'endpoint REST. L’especificació es pot 
 
 El servei es troba a les següents URL's:
 * Producció: https://pda.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/
-* Pre-produció (proves): https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/
+* Pre-producció (proves): https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/
 
 Aspectes importants a tenir en compte:
 1. L’accés al web service serà via https i amb autenticació per certificat, tant per la part client com per la part de servidor. 
 1. **Tant les peticions en mode POST com les respostes són en XML.**
 1. Es poden fer proves d'altes de multes a producció, per provar la connectivitat amb aquest entorn. Només cal posar un codi d'agent que comenci amb "USU", com per exemple "USU1". Totes les multes amb aquests codis d'agent es consideren proves, i per tant no entren al sistema de Multes de l'ORGT.
-1. **Previ a les proves cal comunicar el certificat utilitzat a l’ORGT ja que és necessari instal·lar la clau pública als servidors de la ORGT.** Vegeu el procés de sol·licitud a la [pàgina principal](https://github.com/organisme-de-gestio-tributaria/organisme-de-gestio-tributaria)
+1. **Previ a les proves cal comunicar el certificat utilitzat a l’ORGT ja que és necessari instal·lar la clau pública als servidors de la ORGT** Vegeu el procés de sol·licitud a la [pàgina principal](https://github.com/organisme-de-gestio-tributaria/organisme-de-gestio-tributaria)
 
 L’explicació de cada funció del servei i de les dades que demana es troba a:
 * [Fitxer swagger disponible en aquest repositori](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/swagger%20WcfMultesPDA.json). 
@@ -35,7 +35,7 @@ El webservice ofereix les següents operacions:
 ## Requisits
 
 Abans de fer servir el web service, cal:
-* Cal realitzar el procés de sol·licitud d'adhesió al webservice, [el seu detall està disponible a la pàgina principal](https://github.com/organisme-de-gestio-tributaria/organisme-de-gestio-tributaria). Com a part d'aquest procés, cal facilitar la part pública del certificat amb el qual s'accedirà al web service. El mateix certificat servirà tant per accedir a proves com a producció. Aquest certificat és necessari tant per cridar el web service com per accedir a l'especificació (wsdl, ajuda REST i schema).
+* Realitzar el procés de sol·licitud d'adhesió al webservice, [el seu detall està disponible a la pàgina principal](https://github.com/organisme-de-gestio-tributaria/organisme-de-gestio-tributaria). Com a part d'aquest procés, cal facilitar la part pública del certificat amb el qual s'accedirà al web service. El mateix certificat servirà tant per accedir a proves com a producció. Aquest certificat és necessari tant per cridar el web service com per accedir a l'especificació (wsdl, ajuda REST i schema).
 * Comunicar a l'ORGT els dispositius que es faran servir, per assignar-los un IMEI i donar-los d'alta a la nostra base de dades. Aquesta comunicació s'ha de fer també cada vegada que s'incorpora un nou dispositiu. 
 * Ja no cal comunicar els nous agents, sempre i quan a l'alta de la multa s'especifiqui el camp "quiden", indicant si qui fa la denúncia és un agent ("A"), un vigilant ("V"), un particular ("P") o un altre tipus de persona ("X"). 
 
