@@ -5,6 +5,14 @@ Aquest webservice permet donar d’alta multes i obtenir els fitxers mestres de 
 * Una aplicació web centralitzada. En aquest cas, o bé tota l'aplicació centralitzada gestiona un Ajuntament, i per tant s'identifica de cara a l'ORGT amb un únic IMEI, o bé gestiona diversos Ajuntaments, i per tant s'identifica per cada Ajuntament amb un IMEI diferent. En qualsevol dels dos casos, l'IMEI també l'assignarà l'ORGT seguint una nomenclatura única, que serà del tipus nom_empresa-codi_ajuntament, on nom_empresa és l'empresa que dóna el servei centralitzat, i codi_ajuntament és el codi ORGT de l'Ajuntament. Per exemple, si l'empresa "Multa S.A." gestiona l'Ajuntament d'Abrera, el seu IMEI serà "MULTA-001".
 
 
+## Procediment d’adhesió
+1. Descarregar el [formulari d'adhesió](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Formulari%20d'adhesi%C3%B3.pdf). Si no es visualitza al navegador, descarregueu-lo al vostre dispositiu.
+2. Emplenar el formulari.
+3. El formulari l'ha de signar l’Alcalde/sa o el/la Cap de la Policia
+3. Enviar el formulari signat via EACAT a l’ORGT.
+
+## Informació tècnica
+
 Cal accedir al webservice mitjançat l'endpoint REST. L’especificació es pot obtenir del [fitxer swagger disponible en aquest repositori](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/swagger%20WcfMultesPDA.json).
 
 El servei es troba a les següents URL's:
