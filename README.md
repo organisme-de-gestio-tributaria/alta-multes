@@ -8,7 +8,7 @@ Aquest webservice permet donar d’alta multes i obtenir els fitxers mestres de 
 ## Procediment d’adhesió
 1. Descarregar el [formulari d'adhesió](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Formulari%20d'adhesi%C3%B3.pdf). Si no es visualitza al navegador, descarregueu-lo al vostre dispositiu.
 2. Emplenar el formulari.
-3. El formulari l'ha de signar l’Alcalde/sa o el/la Cap de la Policia
+3. El formulari l'ha de signar l’Alcalde/ssa.
 3. Enviar el formulari signat via EACAT a l’ORGT.
 
 ## Informació tècnica
