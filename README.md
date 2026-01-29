@@ -15,9 +15,11 @@ Aquest webservice permet donar d’alta multes i obtenir els fitxers mestres de 
 
 Cal accedir al webservice mitjançat l'endpoint REST. L’especificació es pot obtenir del [fitxer swagger disponible en aquest repositori](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/swagger%20WcfMultesPDA.json).
 
-El servei es troba a les següents URL's:
+El servei es troba a les següents URL's base:
 * Producció: https://pda.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/
 * Pre-producció (proves): https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/
+
+Nota: Cal afegir l'endpoint a l'URL base. Així, l'endpoint ObtenirRang està disponible a https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/ObtenirRang?pImei=123&pEstat1=1&pEstat2=1 El llistat complet d'endpoints el podeu trobar en forma de taula al final d'aquesta pàgina. 
 
 Aspectes importants a tenir en compte:
 1. L’accés al web service serà via https i amb autenticació per certificat, tant per la part client com per la part de servidor. 
@@ -52,8 +54,8 @@ Abans de fer servir el web service, cal:
 
 A continuació es presenten diversos exemples de crides i respostes. Podeu trobar més informació a:
 * **[Especificació swagger](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/swagger%20WcfMultesPDA.json). Podeu crear el vostre client de forma automàtica a partir d'aquest fitxer.**
-* [Comentaris del WSDL](https://wsproves.orgt.diba.cat/deutes/DeutesServiceREST.svc?singleWsdl). Podeu cancel·lar la sol·licitud de certificat a l'accedir al WSDL. Malgrat que aquest wsdl està disponible només per la versió SOAP, els noms dels camps i les explicacions són les mateixes que per la versió REST.
-* L’esquema de validació de les dades rebudes es troba en el mateix webservice a: https://wsproves.orgt.diba.cat/deutes/schema/Deutes.xsd 
+* [Comentaris del WSDL](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc?singleWsdl). Podeu cancel·lar la sol·licitud de certificat a l'accedir al WSDL. Malgrat que aquest wsdl està disponible només per la versió SOAP, els noms dels camps i les explicacions són les mateixes que per la versió REST.
+* L’esquema de validació de les dades rebudes es troba en el mateix webservice a: https://pdaprv16.orgt.diba.cat/RestMultesPDA/schema/svcMultesPDA.xsd 
 * Cal notar que totes les dades de tipus text han d'estar en majúscules.
 
 | Endpoint | Mètode HTTP | Exemples |
