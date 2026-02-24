@@ -24,7 +24,7 @@ Nota: Cal afegir l'endpoint a l'URL base. Així, l'endpoint ObtenirRang està di
 Aspectes importants a tenir en compte:
 1. L’accés al web service serà via https i amb autenticació per certificat, tant per la part client com per la part de servidor. 
 1. **Tant les peticions en mode POST com les respostes són en XML.**
-1. Es poden fer proves d'altes de multes a producció, per provar la connectivitat amb aquest entorn. Només cal posar un codi d'agent que comenci amb "USU", com per exemple "USU1". Totes les multes amb aquests codis d'agent es consideren proves, i per tant no entren al sistema de Multes de l'ORGT.
+1. Abans de consumir el servei de producció, cal fer proves a pre-producció. Per fer les proves a pre-producció, cal primer adherir-se al servei i comunicar certificat i IMEIs que es faran servir (s'explica a l'apartat de Requisits). Un cop fetes les proves a pre-producció, es poden fer proves d'altes de multes a producció, per provar la connectivitat amb aquest entorn. Per fer aquestes proves de connectivitat a producció, omés cal posar un codi d'agent que comenci amb "USU", com per exemple "USU1". Totes les multes amb aquests codis d'agent es consideren proves, i per tant no entren al sistema de Multes de l'ORGT.
 1. **Previ a les proves cal comunicar el certificat utilitzat a l’ORGT ja que és necessari instal·lar la clau pública als servidors de la ORGT**. Vegeu el procediment d'adhesió a l'inici d'aquest web, els detalls estan en el formulari d'adhesió.
 
 L’explicació de cada funció del servei i de les dades que demana es troba a:
@@ -36,7 +36,7 @@ El webservice ofereix les següents operacions:
 1. AltaMulta: dóna d'alta una multa.
 1. AltaAnulada: anul·la una multa prèviament entrada.
 1. Consulta: Consulta d'una multa. La multa s'identifica pel codi de municipi i el número d'expedient dins d'aquell municipi.
-1. ObtenirActualitzacions: obté les darreres actualitzacions (a partir d'una data donada) dels fitxers mestres de suport, així com dels documents associats.
+1. ObtenirActualitzacions: obté les darreres actualitzacions (a partir d'una data donada) dels fitxers mestres de suport, així com dels documents associats. Un dels fitxer mestres importants és el de conductes. Cada conducta ve identificada per un número seqüencial, que l'associa amb la norma, article, apartat, sub-apartat i número de conducta.
 1. ObtenirRang: obté un rang de números d'expedient per assignar a les multes a donar d'alta.
 1. ObtenirMunicipis: Obté el llistat complet de municipis amb el corresponent codi ORGT i el codi INE de 10 dígits.
 1. Existeixen altres funcions però estan obsoletes
