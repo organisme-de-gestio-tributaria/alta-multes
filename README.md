@@ -26,6 +26,7 @@ Aspectes importants a tenir en compte:
 1. **Tant les peticions en mode POST com les respostes són en XML.**
 1. Abans de consumir el servei de producció, cal fer proves a pre-producció. Per fer les proves a pre-producció, cal primer adherir-se al servei i comunicar certificat i IMEIs que es faran servir (s'explica a l'apartat de Requisits). Un cop fetes les proves a pre-producció, es poden fer proves d'altes de multes a producció, per provar la connectivitat amb aquest entorn. Per fer aquestes proves de connectivitat a producció, omés cal posar un codi d'agent que comenci amb "USU", com per exemple "USU1". Totes les multes amb aquests codis d'agent es consideren proves, i per tant no entren al sistema de Multes de l'ORGT.
 1. **Previ a les proves cal comunicar el certificat utilitzat a l’ORGT ja que és necessari instal·lar la clau pública als servidors de la ORGT**. Vegeu el procediment d'adhesió a l'inici d'aquest web, els detalls estan en el formulari d'adhesió.
+1. En l'endpoint de donar d'alta d'una infracció, en el body del missatge enviat, els **camps XML han d'estar ordenats alfabèticament**. El primer camp ha de ser "cdagen" i l'últim camp "viapen". Podeu veure un exemple [aquí](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaMulta%20peticio.xml)
 
 L’explicació de cada funció del servei i de les dades que demana es troba a:
 * [Fitxer swagger disponible en aquest repositori](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/swagger%20WcfMultesPDA.json). 
@@ -56,7 +57,11 @@ A continuació es presenten diversos exemples de crides i respostes. Podeu troba
 * **[Especificació swagger](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/swagger%20WcfMultesPDA.json). Podeu crear el vostre client de forma automàtica a partir d'aquest fitxer.**
 * [Comentaris del WSDL](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc?singleWsdl). Podeu cancel·lar la sol·licitud de certificat a l'accedir al WSDL. Malgrat que aquest wsdl està disponible només per la versió SOAP, els noms dels camps i les explicacions són les mateixes que per la versió REST.
 * L’esquema de validació de les dades rebudes es troba en el mateix webservice a: https://pdaprv16.orgt.diba.cat/RestMultesPDA/schema/svcMultesPDA.xsd 
-* Cal notar que totes les dades de tipus text han d'estar en majúscules.
+
+Cal notar que:
+1. Totes les dades de tipus text han d'estar en majúscules.
+2. En l'endpoint de donar d'alta d'una infracció, en el body del missatge enviat, els **camps XML han d'estar ordenats alfabèticament**. El primer camp ha de ser "cdagen" i l'últim camp "viapen". Podeu veure un exemple [aquí](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaMulta%20peticio.xml)
+
 
 | Endpoint | Mètode HTTP | Exemples |
 |---|---|---|
