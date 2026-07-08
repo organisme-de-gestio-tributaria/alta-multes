@@ -17,7 +17,7 @@ Cal accedir al webservice mitjançat l'endpoint REST. L’especificació es pot 
 
 El servei es troba a les següents URL's base:
 * Producció: https://pda.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/
-* Pre-producció (proves): https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/
+* Pre-producció (proves): https://wsproves.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/
 
 Nota: Cal afegir l'endpoint a l'URL base. Així, l'endpoint ObtenirRang està disponible a https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/ObtenirRang?pImei=123&pEstat1=1&pEstat2=1 El llistat complet d'endpoints el podeu trobar en forma de taula al final d'aquesta pàgina. 
 
@@ -55,7 +55,7 @@ Abans de fer servir el web service, cal:
 
 A continuació es presenten diversos exemples de crides i respostes. Podeu trobar més informació a:
 * **[Especificació swagger](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/swagger%20WcfMultesPDA.json). Podeu crear el vostre client de forma automàtica a partir d'aquest fitxer.**
-* [Comentaris del WSDL](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc?singleWsdl). Podeu cancel·lar la sol·licitud de certificat a l'accedir al WSDL. Malgrat que aquest wsdl està disponible només per la versió SOAP, els noms dels camps i les explicacions són les mateixes que per la versió REST.
+* [Comentaris del WSDL](https://wsproves.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc?singleWsdl). Podeu cancel·lar la sol·licitud de certificat a l'accedir al WSDL. Malgrat que aquest wsdl està disponible només per la versió SOAP, els noms dels camps i les explicacions són les mateixes que per la versió REST.
 * L’esquema de validació de les dades rebudes es troba en el mateix webservice a: https://pdaprv16.orgt.diba.cat/RestMultesPDA/schema/svcMultesPDA.xsd 
 
 Cal notar que:
@@ -65,9 +65,9 @@ Cal notar que:
 
 | Endpoint | Mètode HTTP | Exemples |
 |---|---|---|
-| AltaMulta | POST | [URL](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/AltaMulta) <br> [Exemple XML petició](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaMulta%20peticio.xml) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaMulta%20resposta.xml)
-| AltaAnulada | GET | [URL petició](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/AltaAnulada?pCdclie=123&pCdexpa=456&pIMEI=789) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaAnulada%20resposta.xml)
-| Consulta | GET | [URL petició](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/Consulta?pCdclie=123&pCdexpa=456) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/Consulta%20resposta.xml)
-| ObtenirActualitzacions | GET | [URL petició](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/ObtenirActualitzacions?pIMEI=123&pClient=456&pData=202503010101&pSeguent=) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/ObtenirActualitzacions%20resposta.xml)
-| ObtenirRang | GET | [URL petició](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/ObtenirRang?pImei=123&pEstat1=1&pEstat2=1) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/ObtenirRang%20resposta.xml)
-| ObtenirMunicipis | GET | [URL petició](https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/ObtenirMunicipis) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/ObtenirMunicipis%20resposta.xml)
+| AltaMulta | POST | [URL](https://wsproves.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/AltaMulta) <br> [Exemple XML petició](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaMulta%20peticio.xml) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaMulta%20resposta.xml)
+| AltaAnulada | GET | [URL petició](https://wsproves.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/AltaAnulada?pCdclie=123&pCdexpa=456&pIMEI=789) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaAnulada%20resposta.xml)
+| Consulta | GET | [URL petició](https://wsproves.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/Consulta?pCdclie=123&pCdexpa=456) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/Consulta%20resposta.xml)
+| ObtenirActualitzacions | GET | [URL petició](https://wsproves.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/ObtenirActualitzacions?pIMEI=123&pClient=456&pData=202503010101&pSeguent=) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/ObtenirActualitzacions%20resposta.xml)
+| ObtenirRang | GET | [URL petició](https://wsproves.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/ObtenirRang?pImei=123&pEstat1=1&pEstat2=1) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/ObtenirRang%20resposta.xml)
+| ObtenirMunicipis | GET | [URL petició](https://wsproves.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/ObtenirMunicipis) <br> [Resposta XML](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/ObtenirMunicipis%20resposta.xml)
