@@ -19,7 +19,7 @@ El servei es troba a les següents URL's base:
 * Producció: https://pda.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/
 * Pre-producció (proves): https://wsproves.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/
 
-Nota: Cal afegir l'endpoint a l'URL base. Així, l'endpoint ObtenirRang està disponible a https://pdaprv16.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/ObtenirRang?pImei=123&pEstat1=1&pEstat2=1 El llistat complet d'endpoints el podeu trobar en forma de taula al final d'aquesta pàgina. 
+Nota: Cal afegir l'endpoint a l'URL base. Així, l'endpoint ObtenirRang està disponible a https://wsproves.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc/rest/ObtenirRang?pImei=123&pEstat1=1&pEstat2=1 El llistat complet d'endpoints el podeu trobar en forma de taula al final d'aquesta pàgina. 
 
 Aspectes importants a tenir en compte:
 1. L’accés al web service serà via https i amb autenticació per certificat, tant per la part client com per la part de servidor. 
@@ -31,7 +31,7 @@ Aspectes importants a tenir en compte:
 L’explicació de cada funció del servei i de les dades que demana es troba a:
 * [Fitxer swagger disponible en aquest repositori](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/swagger%20WcfMultesPDA.json). 
 * [Comentaris del WSDL](https://pda.orgt.diba.cat/WcfMultesPDA/svcMultesPDA.svc?singleWsdl). Podeu cancel·lar la sol·licitud de certificat per a accedir al WSDL. Malgrat que aquest wsdl està disponible només per la versió SOAP, els noms dels camps i les explicacions són les mateixes que per la versió REST.
-* L’esquema de validació de les dades rebudes es troba en el mateix webservice; en el cas de proves a: https://pdaprv16.orgt.diba.cat/RestMultesPDA/schema/svcMultesPDA.xsd 
+* L’esquema de validació de les dades rebudes es troba en el mateix webservice; en el cas de proves a: https://wsproves.orgt.diba.cat/RestMultesPDA/schema/svcMultesPDA.xsd 
 
 El webservice ofereix les següents operacions:
 1. AltaMulta: dóna d'alta una multa.
@@ -56,7 +56,7 @@ Abans de fer servir el web service, cal:
 A continuació es presenten diversos exemples de crides i respostes. Podeu trobar més informació a:
 * **[Especificació swagger](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/swagger%20WcfMultesPDA.json). Podeu crear el vostre client de forma automàtica a partir d'aquest fitxer.**
 * [Comentaris del WSDL](https://wsproves.orgt.diba.cat/RestMultesPDA/svcMultesPDA.svc?singleWsdl). Podeu cancel·lar la sol·licitud de certificat a l'accedir al WSDL. Malgrat que aquest wsdl està disponible només per la versió SOAP, els noms dels camps i les explicacions són les mateixes que per la versió REST.
-* L’esquema de validació de les dades rebudes es troba en el mateix webservice a: https://pdaprv16.orgt.diba.cat/RestMultesPDA/schema/svcMultesPDA.xsd 
+* L’esquema de validació de les dades rebudes es troba en el mateix webservice a: https://wsproves.orgt.diba.cat/RestMultesPDA/schema/svcMultesPDA.xsd 
 
 Cal notar que:
 1. Totes les dades de tipus text han d'estar en majúscules.
