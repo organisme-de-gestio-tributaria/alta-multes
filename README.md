@@ -29,7 +29,7 @@ Aspectes importants a tenir en compte:
 1. En l'endpoint de donar d'alta d'una infracció, en el body del missatge enviat, els **camps XML han d'estar ordenats alfabèticament**. El primer camp ha de ser "cdagen" i l'últim camp "viapen". Podeu veure un exemple [aquí](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaMulta%20peticio.xml)
 
 L’explicació de cada funció del servei i de les dades que demana es troba a:
-* [Fitxer swagger disponible en aquest repositori](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/swagger%20WcfMultes.json). 
+* [Fitxer swagger disponible en aquest repositori](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/swagger%20WcfMultesPDA.json). 
 * [Comentaris del WSDL](https://wsreal.orgt.diba.cat/WcfMultesPDA/svcMultesPDA.svc?singleWsdl). Podeu cancel·lar la sol·licitud de certificat per a accedir al WSDL. Malgrat que aquest wsdl està disponible només per la versió SOAP, els noms dels camps i les explicacions són les mateixes que per la versió REST.
 * L’esquema de validació de les dades rebudes es troba en el mateix webservice; en el cas de proves a: https://wsproves.orgt.diba.cat/RestMultesPDA/schema/svcMultesPDA.xsd 
 
