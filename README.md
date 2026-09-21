@@ -61,6 +61,7 @@ A continuació es presenten diversos exemples de crides i respostes. Podeu troba
 Cal notar que:
 1. Totes les dades de tipus text han d'estar en majúscules.
 2. En l'endpoint de donar d'alta d'una infracció, en el body del missatge enviat, els **camps XML han d'estar ordenats alfabèticament**. El primer camp ha de ser "cdagen" i l'últim camp "viapen". Podeu veure un exemple [aquí](https://github.com/organisme-de-gestio-tributaria/alta-multes/blob/main/Exemples/AltaMulta%20peticio.xml)
+3. Hi ha una limitació en la mida de la foto que es pot adjuntar en donar d'alta la multa, és d'aproximadament 350Kb.
 
 
 | Endpoint | Mètode HTTP | Exemples |
